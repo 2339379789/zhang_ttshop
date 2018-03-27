@@ -1,0 +1,19 @@
+{% extends 'df_goods/detail.html'%}
+
+{% block list %}
+		<div class="r_wrap fr clearfix">
+			<ul class="detail_tab clearfix">
+				<li ><a href="/{{ g.id }}/">商品介绍</a></li>
+				<li class="active">评论</li>
+			</ul>
+
+			<div class="tab_content">
+				<dl>
+					<dt>买家评论：</dt>
+                    {% for i in com %}
+					<dd>{{ i.uid.ushou }}:{{ i.content }}</dd>
+                    {% endfor %}
+				</dl>
+			</div>
+		</div>
+{% endblock list %}

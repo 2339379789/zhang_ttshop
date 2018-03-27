@@ -1,0 +1,64 @@
+{%extends 'df_user/base.html'%}
+{% block right_content %}
+<div class="right_content clearfix">
+    <h3 class="common_title2">全部订单</h3>
+    {% for orderinfo in orderlist %}
+    <ul class="order_list_th w978 clearfix">
+        <li class="col01">{{orderinfo.odate}}</li>
+        <li class="col02">订单号：{{orderinfo.oid}}</li>
+        {% if orderinfo.oIsPay %}
+        <li class="col02 stress">已支付</li>
+        {% else %}
+        <li class="col02 stress">未支付</li>
+        {% endif %}
+    </ul>
+    <table class="order_list_table w980">
+        <tbody>
+        <tr>
+            <td width="55%">
+                {% for item in orderinfo.orderdetailinfo_set.all %}
+                <ul class="order_goods_list clearfix">
+                    <li class="col01"><img src="/media/{{item.goods.gpic}}"></li>
+                    <li class="col02">{{item.goods.gtitle}}<em><span>{{item.price}}</span>元/{{item.goods.gunit}}</em>
+                    </li>
+                    <li class="col03">{{item.count}}个</li>
+                    <li class="col04"></li>
+                </ul>
+                {% endfor %}
+            </td>
+            <td width="15%">{{orderinfo.ototal}}元</td>
+            {% if orderinfo.oIsPay %}
+            <td width="15%">已付款</td>
+            <td width="15%">
+                <a href="#" class="oper_btn">查看物流</a></br></br></br>
+                <a href="//" class="oper_btn">评价</a>
+            </td>
+            {% else %}
+            <td width="15%">未付款</td>
+            <td width="15%"><a href="/order/pay&{{orderinfo.oid}}/" class="oper_btn">去付款</a></td>
+            {% endif %}
+        </tr>
+        </tbody>
+    </table>
+    {% endfor %}
+    <div class="pagenation">
+        {% if orderlist.has_previous %}
+        <a href="/user/user_center_order&{{orderlist.previous_page_number}}/">
+            <上一页
+        </a>
+        {% endif %}
+        {% for index in plist %}
+        {% if pageid == index %}
+        <a href="/user/user_center_order&{{index}}/" class="active">{{index}}</a>
+        {% else %}
+        <a href="/user/user_center_order&{{index}}/">{{index}}</a>
+        {% endif %}
+        {% endfor %}
+        {% if orderlist.has_next %}
+        <a href="/user/user_center_order&{{orderlist.next_page_number}}/">下一页></a>
+        {% endif %}
+    </div>
+</div>
+
+
+{%endblock right_content %}

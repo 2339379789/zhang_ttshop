@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="dataSourceStorageLocal">
+    <data-source name="Django default" uuid="cd6c7f32-3e6e-4f08-b702-01b0b78a4059">
+      <database-info product="" version="" jdbc-version="" driver-name="" driver-version="" />
+      <introspection-schemas>*:ttshop</introspection-schemas>
+    </data-source>
+  </component>
+</project>
